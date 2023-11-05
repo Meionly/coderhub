@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/service/user.service.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1699175298035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699175304846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n-class User\n\\ No newline at end of file\n+class UserService{\r\n+  \r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699175315517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n class UserService{\r\n-  \r\n-}\n\\ No newline at end of file\n+\r\n+}\r\n+\r\n+module.exports = new UserService();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699175322275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n class UserService{\r\n-\r\n+  save() {\r\n+  \r\n }\r\n+}\r\n \r\n module.exports = new UserService();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699175355058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n class UserService{\r\n-  save() {\r\n+  save(user) {\r\n   \r\n }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1699175362654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n class UserService{\r\n   save(user) {\r\n   \r\n+    console.log(user,);\r\n }\r\n }\r\n \r\n module.exports = new UserService();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699175368817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n class UserService{\r\n   save(user) {\r\n   \r\n-    console.log(user,'bao');\r\n+    console.log(user,'bao'cu');\r\n }\r\n }\r\n \r\n module.exports = new UserService();\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699175976650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n   database: 'coderhub',\r\n   user: 'root',\r\n   password: 'Codery123@',\r\n   connectionLimit: 10,\r\n-  multipleStatements: true\r\n \r\n })\r\n \r\n class UserService{\r\n"
+                }
+            ],
+            "date": 1699175298035,
+            "name": "Commit-0",
+            "content": "class User"
+        }
+    ]
+}

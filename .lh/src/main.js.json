@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/main.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1699178887867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699178896385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n // 1.导入app\r\n const app = require(\"./app\");\r\n const { SERVER_PORT } = require(\"./config/server\");\r\n-require\r\n+require('./')\r\n \r\n // 2.将app启动起来\r\n app.listen(SERVER_PORT, () => {\r\n   console.log(\"listening on port 8000\");\r\n"
+                },
+                {
+                    "date": 1699178902732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n // 1.导入app\r\n const app = require(\"./app\");\r\n const { SERVER_PORT } = require(\"./config/server\");\r\n-require('./')\r\n+require('./utils')\r\n \r\n // 2.将app启动起来\r\n app.listen(SERVER_PORT, () => {\r\n   console.log(\"listening on port 8000\");\r\n"
+                }
+            ],
+            "date": 1699178887867,
+            "name": "Commit-0",
+            "content": "// 1.导入app\r\nconst app = require(\"./app\");\r\nconst { SERVER_PORT } = require(\"./config/server\");\r\nrequire\r\n\r\n// 2.将app启动起来\r\napp.listen(SERVER_PORT, () => {\r\n  console.log(\"listening on port 8000\");\r\n});\r\n"
+        }
+    ]
+}

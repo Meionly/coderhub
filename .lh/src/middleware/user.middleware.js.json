@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/middleware/user.middleware.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1699178401119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699178406388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\r\n+\r\n // 验证客户端传递过来的user是否可以保存到数据库中\r\n // 1.验证用户名和密码是否为空\r\n const { name, password } = user;\r\n if (!name || !password) {\r\n"
+                },
+                {
+                    "date": 1699178412278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+const userS\r\n \r\n-\r\n // 验证客户端传递过来的user是否可以保存到数据库中\r\n // 1.验证用户名和密码是否为空\r\n const { name, password } = user;\r\n if (!name || !password) {\r\n"
+                },
+                {
+                    "date": 1699178418839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const userS\r\n+const userService\r\n \r\n // 验证客户端传递过来的user是否可以保存到数据库中\r\n // 1.验证用户名和密码是否为空\r\n const { name, password } = user;\r\n"
+                },
+                {
+                    "date": 1699178432805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const userService =\r\n+const userService = reqi\r\n \r\n // 验证客户端传递过来的user是否可以保存到数据库中\r\n // 1.验证用户名和密码是否为空\r\n const { name, password } = user;\r\n"
+                },
+                {
+                    "date": 1699178545804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     message: \"用户名已经存在\",\r\n   };\r\n   return;\r\n }\r\n-next\r\n+next()\r\n }\r\n \r\n module.exports = {\r\n   verifyUser\r\n"
+                }
+            ],
+            "date": 1699178401119,
+            "name": "Commit-0",
+            "content": "// 验证客户端传递过来的user是否可以保存到数据库中\r\n// 1.验证用户名和密码是否为空\r\nconst { name, password } = user;\r\nif (!name || !password) {\r\n  ctx.body = {\r\n    code: -1001,\r\n    message: \"用户名和密码不能为空\",\r\n  };\r\n  return;\r\n}\r\n// 2.判断name是否在数据库中已经存在;\r\nconst findName = await userService.findUserByName(name);\r\nif (findName.length) {\r\n  ctx.body = {\r\n    code: -1002,\r\n    message: \"用户名已经存在\",\r\n  };\r\n  return;\r\n}\r\n"
+        }
+    ]
+}

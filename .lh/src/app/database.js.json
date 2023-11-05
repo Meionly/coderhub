@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/app/database.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1699176046958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699176054061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,4 +9,6 @@\n   connectionLimit: 5,\r\n });\r\n \r\n const connection = connectionPool.promise();\r\n+\r\n+module.exports = \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699176166006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,5 +10,8 @@\n });\r\n \r\n const connection = connectionPool.promise();\r\n \r\n-module.exports = \n\\ No newline at end of file\n+\r\n+\r\n+\r\n+module.exports = connection;\r\n"
+                },
+                {
+                    "date": 1699176173787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n const mysql = require(\"mysql2\");\r\n \r\n+// \r\n const connectionPool = mysql.createPool({\r\n   host: \"localhost\",\r\n   port: \"3306\",\r\n   database: \"coderhub\",\r\n"
+                },
+                {
+                    "date": 1699176181162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const mysql = require(\"mysql2\");\r\n \r\n-// \r\n+// 1.创建连接池\r\n const connectionPool = mysql.createPool({\r\n   host: \"localhost\",\r\n   port: \"3306\",\r\n   database: \"coderhub\",\r\n"
+                },
+                {
+                    "date": 1699176187838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \r\n \r\n \r\n \r\n-// 3.\r\n+// 3.h\r\n const connection = connectionPool.promise();\r\n \r\n \r\n \r\n"
+                },
+                {
+                    "date": 1699176207250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+const mysql = require(\"mysql2\");\r\n+\r\n+// 1.创建连接池\r\n+const connectionPool = mysql.createPool({\r\n+  host: \"localhost\",\r\n+  port: \"3306\",\r\n+  database: \"coderhub\",\r\n+  user: \"root\",\r\n+  password: \"Codery123@\",\r\n+  connectionLimit: 5,\r\n+});\r\n+\r\n+\r\n+\r\n+\r\n+\r\n+// 3.获取连接池中连接对象(promise)\r\n+const connection = connectionPool.promise();\r\n+\r\n+\r\n+\r\n+\r\n+module.exports = connection;\r\n"
+                }
+            ],
+            "date": 1699176046958,
+            "name": "Commit-0",
+            "content": "const mysql = require(\"mysql2\");\r\n\r\nconst connectionPool = mysql.createPool({\r\n  host: \"localhost\",\r\n  port: \"3306\",\r\n  database: \"coderhub\",\r\n  user: \"root\",\r\n  password: \"Codery123@\",\r\n  connectionLimit: 5,\r\n});\r\n\r\nconst connection = connectionPool.promise();\r\n"
+        }
+    ]
+}

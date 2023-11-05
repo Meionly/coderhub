@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/router/user.router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1699171180162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699171186511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,5 @@\n   ctx.body = \"Hello World\";\r\n });\r\n \r\n \r\n-module.ex\n\\ No newline at end of file\n+module.exports = userRouter\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699174906751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n const KoaRouter = require(\"@koa/router\");\r\n \r\n+// 1.\r\n const userRouter = new KoaRouter({ prefix: \"/users\" });\r\n \r\n userRouter.get(\"/list\", (ctx, next) => {\r\n   ctx.body = \"Hello World\";\r\n });\r\n \r\n-\r\n\\ No newline at end of file\n-module.exports = userRouter\n+module.exports = userRouter;\r\n"
+                },
+                {
+                    "date": 1699174915226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const KoaRouter = require(\"@koa/router\");\r\n \r\n-// 1.ch\r\n+// 1.创建路由dui'xa\r\n const userRouter = new KoaRouter({ prefix: \"/users\" });\r\n \r\n userRouter.get(\"/list\", (ctx, next) => {\r\n   ctx.body = \"Hello World\";\r\n"
+                },
+                {
+                    "date": 1699174972885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,12 +5,12 @@\n \r\n // 2.定义路由中映射\r\n // 2.1用户注册接口\r\n userRouter.post(\"/\", (ctx, next) => {\r\n-  ctx.body = \"Hello World\";\r\n-\r\n-\r\n   \r\n+  \r\n+  \r\n });\r\n+ctx.body = \"Hello World\";\r\n \r\n // 3.导出路由\r\n module.exports = userRouter;\r\n"
+                }
+            ],
+            "date": 1699171180162,
+            "name": "Commit-0",
+            "content": "const KoaRouter = require(\"@koa/router\");\r\n\r\nconst userRouter = new KoaRouter({ prefix: \"/users\" });\r\n\r\nuserRouter.get(\"/list\", (ctx, next) => {\r\n  ctx.body = \"Hello World\";\r\n});\r\n\r\n\r\nmodule.ex"
+        }
+    ]
+}
