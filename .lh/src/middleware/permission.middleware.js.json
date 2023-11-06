@@ -1,0 +1,110 @@
+{
+    "sourceFile": "src/middleware/permission.middleware.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1699274332243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699274339778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-const \n\\ No newline at end of file\n+const verifyMo\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274346030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-const verifyMo\n\\ No newline at end of file\n+const verifyMomentPermission\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274352160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-const verifyMomentPermission\n\\ No newline at end of file\n+const verifyMomentPermission=()\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274359003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-const verifyMomentPermission=()\n\\ No newline at end of file\n+const verifyMomentPermission=(ctx,next)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274371596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n-const verifyMomentPermission=(ctx,next)\n\\ No newline at end of file\n+const verifyMomentPermission = (ctx, next) => {\r\n+  \r\n+}\r\n+\r\n+module.exports = \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274377320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n const verifyMomentPermission = (ctx, next) => {\r\n   \r\n }\r\n \r\n-module.exports = \n\\ No newline at end of file\n+module.exports = verifyMomentPermission;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699274418240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,9 @@\n const verifyMomentPermission = (ctx, next) => {\r\n-  \r\n-}\r\n \r\n-module.exports = verifyMomentPermission;\n\\ No newline at end of file\n+1.获取登录用户id/修改动态的id\r\n+2.查询user的id是否有修改momentId的权限\r\n+\r\n+\r\n+};\r\n+\r\n+module.exports = verifyMomentPermission;\r\n"
+                },
+                {
+                    "date": 1699274425622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n-1.获取登录用户id/修改动态的id\r\n-2.查询user的id是否有修改momentId的权限\r\n+// 1.获取登录用户id/修改动态的id\r\n+  // 2.查询user的id是否有修改momentId的权限\r\n+  // 3.\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274430841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n // 1.获取登录用户id/修改动态的id\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  // 3.\r\n+  // 3.c\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274441487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n-// 1.获取登录用户id/修改动态的id\r\n+  // 1.获取登录用户id/修改动态的id\r\n+  const {id}\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  // 3.c\r\n+  \r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274447010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n   // 1.获取登录用户id/修改动态的id\r\n-  const {id}\r\n+  const {id} = ctx.user\r\n   // 2.查询user的id是否有修改momentId的权限\r\n   \r\n \r\n \r\n"
+                },
+                {
+                    "date": 1699274452793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n   // 1.获取登录用户id/修改动态的id\r\n-  const {id} = ctx.user\r\n+  const { id } = ctx.user\r\n+  const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n   \r\n \r\n \r\n"
+                },
+                {
+                    "date": 1699274471730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  \r\n+  const re\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274479141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const re\r\n+  const result = aea\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274485313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = aea\r\n+  const result = await \r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274496269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,13 @@\n+const momentService = require(\"../service/moment.service\");\r\n+\r\n const verifyMomentPermission = (ctx, next) => {\r\n \r\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = await \r\n+  const result = await momentService\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274506994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = await momentService\r\n+  const result = await momentService.moment\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274512214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = await momentService.moment\r\n+  const result = await momentService.momentPermission()\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274537355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = await momentService.momentPermission()\r\n+  const result = await momentService.momentPermission(m)\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274543673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n-  const result = await momentService.momentPermission(m)\r\n+  const result = await momentService.momentPermission(momentId,id)\r\n \r\n \r\n };\r\n \r\n"
+                },
+                {
+                    "date": 1699274549152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const momentService = require(\"../service/moment.service\");\r\n \r\n-const verifyMomentPermission = (ctx, next) => {\r\n+const verifyMomentPermission =async (ctx, next) => {\r\n \r\n   // 1.获取登录用户id/修改动态的id\r\n   const { id } = ctx.user\r\n   const { momentId } = ctx.params\r\n"
+                },
+                {
+                    "date": 1699274557276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,11 @@\n   const { momentId } = ctx.params\r\n   // 2.查询user的id是否有修改momentId的权限\r\n   const result = await momentService.momentPermission(momentId,id)\r\n \r\n-  ctx.body = {}\r\n+  ctx.body = {\r\n+    \r\n+  }\r\n \r\n };\r\n \r\n module.exports = verifyMomentPermission;\r\n"
+                },
+                {
+                    "date": 1699274576425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   const result = await momentService.momentPermission(momentId,id)\r\n \r\n   ctx.body = {\r\n     code: 0,\r\n-    data:SpeechRecognitionResultListm\r\n+    data:SpeechRecognitionResultListme\r\n   }\r\n \r\n };\r\n \r\n"
+                }
+            ],
+            "date": 1699274332243,
+            "name": "Commit-0",
+            "content": "const "
+        }
+    ]
+}

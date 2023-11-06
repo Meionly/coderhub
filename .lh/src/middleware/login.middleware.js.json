@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/middleware/login.middleware.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1699252781146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699252790533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-const\n\\ No newline at end of file\n+const verifyLogin\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699252795862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n-const verifyLogin\n\\ No newline at end of file\n+const verifyLogin = () +> {\r\n+  \r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699252802711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,7 @@\n-const verifyLogin = () +> {\r\n+const verifyLogin = () => {\r\n   \r\n\\ No newline at end of file\n-}\n+}\r\n+\r\n+module.exports = {\r\n+  verifyLogin,\r\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699252814562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n const verifyLogin = () => {\r\n+\r\n+\r\n+\r\n   \r\n-}\r\n+};\r\n\\ No newline at end of file\n \r\n module.exports = {\r\n   verifyLogin,\r\n-};\n+};\r\n"
+                },
+                {
+                    "date": 1699252822088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n const verifyLogin = () => {\r\n \r\n \r\n \r\n-  \r\n+  await next()\r\n };\r\n \r\n module.exports = {\r\n   verifyLogin,\r\n\\ No newline at end of file\n-};\n+};\r\n"
+                },
+                {
+                    "date": 1699252829796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const verifyLogin = async(ctx) => {\r\n+const verifyLogin = async(ctx,) => {\r\n \r\n \r\n \r\n   await next()\r\n"
+                },
+                {
+                    "date": 1699252844660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n const verifyLogin = async (ctx, next) => {\r\n+  // 1.判断用户名和密码是否为空\r\n+  // 2.查询该用户是否在数据库中存在\r\n+  // 3.查询数据库中密码和用户传递的密码是否一致\r\n \r\n-\r\n-  \r\n   await next();\r\n };\r\n \r\n module.exports = {\r\n"
+                }
+            ],
+            "date": 1699252781146,
+            "name": "Commit-0",
+            "content": "const"
+        }
+    ]
+}

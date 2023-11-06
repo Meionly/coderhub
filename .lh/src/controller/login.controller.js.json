@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/controller/login.controller.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1699252448395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699252456576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n-class LoginController\n\\ No newline at end of file\n+class LoginController{\r\n+  \r\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1699252448394,
+            "name": "Commit-0",
+            "content": "class "
+        }
+    ]
+}

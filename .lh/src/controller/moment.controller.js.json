@@ -1,0 +1,142 @@
+{
+    "sourceFile": "src/controller/moment.controller.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 31,
+            "patches": [
+                {
+                    "date": 1699273198627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699273209813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,8 +46,10 @@\n       data: result[0],\r\n     };\r\n   }\r\n \r\n-  async update()\r\n+  async update(ctx, next) {\r\n+    \r\n+  }\r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273214974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     };\r\n   }\r\n \r\n   async update(ctx, next) {\r\n-    \r\n+    // \r\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273222579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,10 @@\n   }\r\n \r\n   async update(ctx, next) {\r\n     // \r\n+    const { momentId } = ctx.params;\r\n+    \r\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273234349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,11 +47,11 @@\n     };\r\n   }\r\n \r\n   async update(ctx, next) {\r\n-    // \r\n+    // 获取要修改的id\r\n     const { momentId } = ctx.params;\r\n-    \r\n+\r\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273241260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,59 @@\n+const momentService = require(\"../service/moment.service\");\r\n+\r\n+class MomentController {\r\n+  async create(ctx, next) {\r\n+    // 1.获取动态的内容\r\n+    const { content } = ctx.request.body;\r\n+\r\n+    // 2.动态谁发布的(token=>id/name)\r\n+    const { id } = ctx.user;\r\n+\r\n+    // 3.将动态的相关数据保存到数据库中\r\n+    const values = await momentService.save(content, id);\r\n+\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"用户动态发布成功\",\r\n+      data: values,\r\n+    };\r\n+  }\r\n+\r\n+  async getList(ctx, next) {\r\n+    // 获取offset,size\r\n+    const { offset, size } = ctx.query;\r\n+\r\n+    // 从数据库中查询列表\r\n+    const result = await momentService.queryList(offset, size);\r\n+\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态列表成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+\r\n+  async momentDetail(ctx, next) {\r\n+    // 1.获取动态的id\r\n+    const { momentId } = ctx.params;\r\n+\r\n+    // 2.根据id查询动态详情\r\n+    const result = await momentService.queryDetail(momentId);\r\n+\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态详情成功\",\r\n+      data: result[0],\r\n+    };\r\n+  }\r\n+\r\n+  async update(ctx, next) {\r\n+    // 获取要修改的id\r\n+    const { momentId } = ctx.params;\r\n+    const { content } = ctx.request.body;\r\n+    \r\n+\r\n+  }\r\n+}\r\n+\r\n+module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273255697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,70 +47,13 @@\n     };\r\n   }\r\n \r\n   async update(ctx, next) {\r\n-    // 获取要修改的id\r\n+    // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     const { content } = ctx.request.body;\r\n-    \r\n+    const result = await momentService.update(momentId, content);\r\n \r\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n-const momentService = require(\"../service/moment.service\");\r\n-\r\n-class MomentController {\r\n-  async create(ctx, next) {\r\n-    // 1.获取动态的内容\r\n-    const { content } = ctx.request.body;\r\n-\r\n-    // 2.动态谁发布的(token=>id/name)\r\n-    const { id } = ctx.user;\r\n-\r\n-    // 3.将动态的相关数据保存到数据库中\r\n-    const values = await momentService.save(content, id);\r\n-\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"用户动态发布成功\",\r\n-      data: values,\r\n-    };\r\n-  }\r\n-\r\n-  async getList(ctx, next) {\r\n-    // 获取offset,size\r\n-    const { offset, size } = ctx.query;\r\n-\r\n-    // 从数据库中查询列表\r\n-    const result = await momentService.queryList(offset, size);\r\n-\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态列表成功\",\r\n-      data: result,\r\n-    };\r\n-  }\r\n-\r\n-  async momentDetail(ctx, next) {\r\n-    // 1.获取动态的id\r\n-    const { momentId } = ctx.params;\r\n-\r\n-    // 2.根据id查询动态详情\r\n-    const result = await momentService.queryDetail(momentId);\r\n-\r\n-    // 返回数据\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态详情成功\",\r\n-      data: result[0],\r\n-    };\r\n-  }\r\n-\r\n-  async update(ctx, next) {\r\n-    // 获取要修改的id\r\n-    const { momentId } = ctx.params;\r\n-\r\n-  }\r\n-}\r\n-\r\n-module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273263678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,11 @@\n \r\n   async update(ctx, next) {\r\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n+    // 2.获取要修改的内容\r\n     const { content } = ctx.request.body;\r\n+    \r\n     const result = await momentService.update(momentId, content);\r\n \r\n   }\r\n }\r\n"
+                },
+                {
+                    "date": 1699273274557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,10 +51,11 @@\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     // 2.获取要修改的内容\r\n     const { content } = ctx.request.body;\r\n+    // 3.根据id修改动态内容\r\n+    const result = await momentService.update(momentId, content);\r\n     \r\n-    const result = await momentService.update(momentId, content);\r\n \r\n   }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1699273288173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,10 +52,15 @@\n     const { momentId } = ctx.params;\r\n     // 2.获取要修改的内容\r\n     const { content } = ctx.request.body;\r\n     // 3.根据id修改动态内容\r\n-    const result = await momentService.update(momentId, content);\r\n-    \r\n+    const result = await momentService.updateByID(momentId, content);\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"修改动态成功\",\r\n+      data: result,\r\n+    };\r\n \r\n   }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1699273298437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     const { momentId } = ctx.params;\r\n     // 2.获取要修改的内容\r\n     const { content } = ctx.request.body;\r\n     // 3.根据id修改动态内容\r\n-    const result = await momentService.updateByID(momentId, content);\r\n+    const result = await momentService.updateById(, content);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n"
+                },
+                {
+                    "date": 1699273306435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     const { momentId } = ctx.params;\r\n     // 2.获取要修改的内容\r\n     const { content } = ctx.request.body;\r\n     // 3.根据id修改动态内容\r\n-    const result = await momentService.updateById(, content);\r\n+    const result = await momentService.updateById(, content,momentId);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n"
+                },
+                {
+                    "date": 1699273320784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,19 +49,18 @@\n \r\n   async update(ctx, next) {\r\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n-    // 2.获取要修改的内容\r\n+    // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n     // 3.根据id修改动态内容\r\n-    const result = await momentService.updateById(, content,momentId);\r\n+    const result = await momentService.updateById(content, momentId);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n       data: result,\r\n     };\r\n-\r\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273326198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n-    // 3.根据id修改动态内容\r\n+    // 3.\r\n     const result = await momentService.updateById(content, momentId);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n"
+                },
+                {
+                    "date": 1699273332375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n-    // 3.\r\n+    // 3.执行数据库\r\n     const result = await momentService.updateById(content, momentId);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n"
+                },
+                {
+                    "date": 1699273337592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,67 @@\n+const momentService = require(\"../service/moment.service\");\r\n+\r\n+class MomentController {\r\n+  async create(ctx, next) {\r\n+    // 1.获取动态的内容\r\n+    const { content } = ctx.request.body;\r\n+\r\n+    // 2.动态谁发布的(token=>id/name)\r\n+    const { id } = ctx.user;\r\n+\r\n+    // 3.将动态的相关数据保存到数据库中\r\n+    const values = await momentService.save(content, id);\r\n+\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"用户动态发布成功\",\r\n+      data: values,\r\n+    };\r\n+  }\r\n+\r\n+  async getList(ctx, next) {\r\n+    // 获取offset,size\r\n+    const { offset, size } = ctx.query;\r\n+\r\n+    // 从数据库中查询列表\r\n+    const result = await momentService.queryList(offset, size);\r\n+\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态列表成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+\r\n+  async momentDetail(ctx, next) {\r\n+    // 1.获取动态的id\r\n+    const { momentId } = ctx.params;\r\n+\r\n+    // 2.根据id查询动态详情\r\n+    const result = await momentService.queryDetail(momentId);\r\n+\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态详情成功\",\r\n+      data: result[0],\r\n+    };\r\n+  }\r\n+\r\n+  async update(ctx, next) {\r\n+    // 1.获取要修改的id\r\n+    const { momentId } = ctx.params;\r\n+    // 2.修改的内容\r\n+    const { content } = ctx.request.body;\r\n+    // 3.执行数据库操作\r\n+    const result = await momentService.updateById(content, momentId);\r\n+    \r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"修改动态成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+}\r\n+\r\n+module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273376897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,11 +51,10 @@\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n-    // 3.执行数据库操作\r\n+    // 3.zhi\r\n     const result = await momentService.updateById(content, momentId);\r\n-    \r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n@@ -64,70 +63,4 @@\n   }\r\n }\r\n \r\n module.exports = new MomentController();\r\n-const momentService = require(\"../service/moment.service\");\r\n-\r\n-class MomentController {\r\n-  async create(ctx, next) {\r\n-    // 1.获取动态的内容\r\n-    const { content } = ctx.request.body;\r\n-\r\n-    // 2.动态谁发布的(token=>id/name)\r\n-    const { id } = ctx.user;\r\n-\r\n-    // 3.将动态的相关数据保存到数据库中\r\n-    const values = await momentService.save(content, id);\r\n-\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"用户动态发布成功\",\r\n-      data: values,\r\n-    };\r\n-  }\r\n-\r\n-  async getList(ctx, next) {\r\n-    // 获取offset,size\r\n-    const { offset, size } = ctx.query;\r\n-\r\n-    // 从数据库中查询列表\r\n-    const result = await momentService.queryList(offset, size);\r\n-\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态列表成功\",\r\n-      data: result,\r\n-    };\r\n-  }\r\n-\r\n-  async momentDetail(ctx, next) {\r\n-    // 1.获取动态的id\r\n-    const { momentId } = ctx.params;\r\n-\r\n-    // 2.根据id查询动态详情\r\n-    const result = await momentService.queryDetail(momentId);\r\n-\r\n-    // 返回数据\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态详情成功\",\r\n-      data: result[0],\r\n-    };\r\n-  }\r\n-\r\n-  async update(ctx, next) {\r\n-    // 1.获取要修改的id\r\n-    const { momentId } = ctx.params;\r\n-    // 2.修改的内容\r\n-    const { content } = ctx.request.body;\r\n-    // 3.执行数据库\r\n-    const result = await momentService.updateById(content, momentId);\r\n-    // 返回数据\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"修改动态成功\",\r\n-      data: result,\r\n-    };\r\n-  }\r\n-}\r\n-\r\n-module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699273382967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,10 +51,10 @@\n     // 1.获取要修改的id\r\n     const { momentId } = ctx.params;\r\n     // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n-    // 3.zhi\r\n-    const result = await momentService.updateById(content, momentId);\r\n+    // 3.执行数据库操作\r\n+    const result = await momentService.updateById(content, content);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n"
+                },
+                {
+                    "date": 1699273839200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,8 @@\n \r\n   async momentDetail(ctx, next) {\r\n     // 1.获取动态的id\r\n     const { momentId } = ctx.params;\r\n-\r\n     // 2.根据id查询动态详情\r\n     const result = await momentService.queryDetail(momentId);\r\n \r\n     // 返回数据\r\n@@ -52,9 +51,9 @@\n     const { momentId } = ctx.params;\r\n     // 2.修改的内容\r\n     const { content } = ctx.request.body;\r\n     // 3.执行数据库操作\r\n-    const result = await momentService.updateById(content, content);\r\n+    const result = await momentService.updateById(content, momentId);\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"修改动态成功\",\r\n"
+                },
+                {
+                    "date": 1699273845349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,12 +20,10 @@\n \r\n   async getList(ctx, next) {\r\n     // 获取offset,size\r\n     const { offset, size } = ctx.query;\r\n-\r\n     // 从数据库中查询列表\r\n     const result = await momentService.queryList(offset, size);\r\n-\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"获取动态列表成功\",\r\n       data: result,\r\n@@ -36,9 +34,8 @@\n     // 1.获取动态的id\r\n     const { momentId } = ctx.params;\r\n     // 2.根据id查询动态详情\r\n     const result = await momentService.queryDetail(momentId);\r\n-\r\n     // 返回数据\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"获取动态详情成功\",\r\n"
+                },
+                {
+                    "date": 1699275289102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,12 @@\n class MomentController {\r\n   async create(ctx, next) {\r\n     // 1.获取动态的内容\r\n     const { content } = ctx.request.body;\r\n-\r\n     // 2.动态谁发布的(token=>id/name)\r\n     const { id } = ctx.user;\r\n-\r\n     // 3.将动态的相关数据保存到数据库中\r\n     const values = await momentService.save(content, id);\r\n-\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"用户动态发布成功\",\r\n       data: values,\r\n@@ -56,7 +53,9 @@\n       message: \"修改动态成功\",\r\n       data: result,\r\n     };\r\n   }\r\n+\r\n+  \r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275300985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n       message: \"修改动态成功\",\r\n       data: result,\r\n     };\r\n   }\r\n+async delete(ctx,next)\r\n \r\n-  \r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275311345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,12 @@\n       message: \"修改动态成功\",\r\n       data: result,\r\n     };\r\n   }\r\n-async delete(ctx,next)\r\n+  async delete(ctx, next) {\r\n+  \r\n+    const \r\n+}\r\n \r\n }\r\n \r\n module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275318533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n   \r\n-    const \r\n+    const =\r\n }\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1699275327932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,64 @@\n+const momentService = require(\"../service/moment.service\");\r\n+\r\n+class MomentController {\r\n+  async create(ctx, next) {\r\n+    // 1.获取动态的内容\r\n+    const { content } = ctx.request.body;\r\n+    // 2.动态谁发布的(token=>id/name)\r\n+    const { id } = ctx.user;\r\n+    // 3.将动态的相关数据保存到数据库中\r\n+    const values = await momentService.save(content, id);\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"用户动态发布成功\",\r\n+      data: values,\r\n+    };\r\n+  }\r\n+\r\n+  async getList(ctx, next) {\r\n+    // 获取offset,size\r\n+    const { offset, size } = ctx.query;\r\n+    // 从数据库中查询列表\r\n+    const result = await momentService.queryList(offset, size);\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态列表成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+\r\n+  async momentDetail(ctx, next) {\r\n+    // 1.获取动态的id\r\n+    const { momentId } = ctx.params;\r\n+    // 2.根据id查询动态详情\r\n+    const result = await momentService.queryDetail(momentId);\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态详情成功\",\r\n+      data: result[0],\r\n+    };\r\n+  }\r\n+\r\n+  async update(ctx, next) {\r\n+    // 1.获取要修改的id\r\n+    const { momentId } = ctx.params;\r\n+    // 2.修改的内容\r\n+    const { content } = ctx.request.body;\r\n+    // 3.执行数据库操作\r\n+    const result = await momentService.updateById(content, momentId);\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"修改动态成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+  async delete(ctx, next) {\r\n+  \r\n+    const =ctx.params\r\n+}\r\n+\r\n+}\r\n+\r\n+module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275333309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,74 +55,10 @@\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n   \r\n-    const =ctx.params\r\n+    const {mo} =ctx.params\r\n }\r\n \r\n }\r\n \r\n module.exports = new MomentController();\r\n-const momentService = require(\"../service/moment.service\");\r\n-\r\n-class MomentController {\r\n-  async create(ctx, next) {\r\n-    // 1.获取动态的内容\r\n-    const { content } = ctx.request.body;\r\n-    // 2.动态谁发布的(token=>id/name)\r\n-    const { id } = ctx.user;\r\n-    // 3.将动态的相关数据保存到数据库中\r\n-    const values = await momentService.save(content, id);\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"用户动态发布成功\",\r\n-      data: values,\r\n-    };\r\n-  }\r\n-\r\n-  async getList(ctx, next) {\r\n-    // 获取offset,size\r\n-    const { offset, size } = ctx.query;\r\n-    // 从数据库中查询列表\r\n-    const result = await momentService.queryList(offset, size);\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态列表成功\",\r\n-      data: result,\r\n-    };\r\n-  }\r\n-\r\n-  async momentDetail(ctx, next) {\r\n-    // 1.获取动态的id\r\n-    const { momentId } = ctx.params;\r\n-    // 2.根据id查询动态详情\r\n-    const result = await momentService.queryDetail(momentId);\r\n-    // 返回数据\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"获取动态详情成功\",\r\n-      data: result[0],\r\n-    };\r\n-  }\r\n-\r\n-  async update(ctx, next) {\r\n-    // 1.获取要修改的id\r\n-    const { momentId } = ctx.params;\r\n-    // 2.修改的内容\r\n-    const { content } = ctx.request.body;\r\n-    // 3.执行数据库操作\r\n-    const result = await momentService.updateById(content, momentId);\r\n-    // 返回数据\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"修改动态成功\",\r\n-      data: result,\r\n-    };\r\n-  }\r\n-  async delete(ctx, next) {\r\n-  \r\n-    const =\r\n-}\r\n-\r\n-}\r\n-\r\n-module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275343431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,10 +54,10 @@\n       data: result,\r\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n-  \r\n-    const {mo} =ctx.params\r\n+  const user = ctx.user\r\n+    const {momentId} =ctx.params\r\n }\r\n \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1699275351325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n       data: result,\r\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n-  const user = ctx.user\r\n+  const {is:user_id} = ctx.user\r\n     const {momentId} =ctx.params\r\n }\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1699275358683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n       data: result,\r\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n-  const {is:user_id} = ctx.user\r\n+  const {id:us} = ctx.user\r\n     const {momentId} =ctx.params\r\n }\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1699275366328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,64 @@\n+const momentService = require(\"../service/moment.service\");\r\n+\r\n+class MomentController {\r\n+  async create(ctx, next) {\r\n+    // 1.获取动态的内容\r\n+    const { content } = ctx.request.body;\r\n+    // 2.动态谁发布的(token=>id/name)\r\n+    const { id } = ctx.user;\r\n+    // 3.将动态的相关数据保存到数据库中\r\n+    const values = await momentService.save(content, id);\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"用户动态发布成功\",\r\n+      data: values,\r\n+    };\r\n+  }\r\n+\r\n+  async getList(ctx, next) {\r\n+    // 获取offset,size\r\n+    const { offset, size } = ctx.query;\r\n+    // 从数据库中查询列表\r\n+    const result = await momentService.queryList(offset, size);\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态列表成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+\r\n+  async momentDetail(ctx, next) {\r\n+    // 1.获取动态的id\r\n+    const { momentId } = ctx.params;\r\n+    // 2.根据id查询动态详情\r\n+    const result = await momentService.queryDetail(momentId);\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"获取动态详情成功\",\r\n+      data: result[0],\r\n+    };\r\n+  }\r\n+\r\n+  async update(ctx, next) {\r\n+    // 1.获取要修改的id\r\n+    const { momentId } = ctx.params;\r\n+    // 2.修改的内容\r\n+    const { content } = ctx.request.body;\r\n+    // 3.执行数据库操作\r\n+    const result = await momentService.updateById(content, momentId);\r\n+    // 返回数据\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"修改动态成功\",\r\n+      data: result,\r\n+    };\r\n+  }\r\n+  async delete(ctx, next) {\r\n+    \r\n+    const { id: user_id } = ctx.user;\r\n+    const { momentId } = ctx.params;\r\n+  }\r\n+}\r\n+\r\n+module.exports = new MomentController();\r\n"
+                },
+                {
+                    "date": 1699275375245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n       data: result,\r\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n-// huo'q\r\n+// 获取\r\n     const { id: user_id } = ctx.user;\r\n \r\n     const { momentId } = ctx.params;\r\n \r\n"
+                },
+                {
+                    "date": 1699275391815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n       data: result,\r\n     };\r\n   }\r\n   async delete(ctx, next) {\r\n-// 获取要删除的动态id/\r\n+// 获取要删除的动态id/y\r\n     const { id: user_id } = ctx.user;\r\n \r\n     const { momentId } = ctx.params;\r\n \r\n"
+                }
+            ],
+            "date": 1699273198627,
+            "name": "Commit-0",
+            "content": "const momentService = require(\"../service/moment.service\");\r\n\r\nclass MomentController {\r\n  async create(ctx, next) {\r\n    // 1.获取动态的内容\r\n    const { content } = ctx.request.body;\r\n\r\n    // 2.动态谁发布的(token=>id/name)\r\n    const { id } = ctx.user;\r\n\r\n    // 3.将动态的相关数据保存到数据库中\r\n    const values = await momentService.save(content, id);\r\n\r\n    ctx.body = {\r\n      code: 200,\r\n      message: \"用户动态发布成功\",\r\n      data: values,\r\n    };\r\n  }\r\n\r\n  async getList(ctx, next) {\r\n    // 获取offset,size\r\n    const { offset, size } = ctx.query;\r\n\r\n    // 从数据库中查询列表\r\n    const result = await momentService.queryList(offset, size);\r\n\r\n    ctx.body = {\r\n      code: 200,\r\n      message: \"获取动态列表成功\",\r\n      data: result,\r\n    };\r\n  }\r\n\r\n  async momentDetail(ctx, next) {\r\n    // 1.获取动态的id\r\n    const { momentId } = ctx.params;\r\n\r\n    // 2.根据id查询动态详情\r\n    const result = await momentService.queryDetail(momentId);\r\n\r\n    // 返回数据\r\n    ctx.body = {\r\n      code: 200,\r\n      message: \"获取动态详情成功\",\r\n      data: result[0],\r\n    };\r\n  }\r\n\r\n  async update()\r\n}\r\n\r\nmodule.exports = new MomentController();\r\n"
+        }
+    ]
+}

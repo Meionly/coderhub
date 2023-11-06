@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/service/moment.service.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1699273344866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699273351443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,7 +31,11 @@\n     `;\r\n     const [result] = await connection.execute(statement, [momentId]);\r\n     return result;\r\n   }\r\n-  async \r\n+  async updateById(content, momentId) {\r\n+    const statement = `UPDATE moment SET content =? WHERE id =?`;\r\n+    const [result] = await connection.execute(statement, [content, momentId]);\r\n+    return result;\r\n+  }\r\n }\r\n module.exports = new MomentService();\r\n"
+                },
+                {
+                    "date": 1699273360744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n     const [result] = await connection.execute(statement, [momentId]);\r\n     return result;\r\n   }\r\n   async updateById(content, momentId) {\r\n-    const statement = `UPDATE moment SET content =? WHERE id =?`;\r\n+    const statement = `UPDATE moment SET content = ? WHERE id =?`;\r\n     const [result] = await connection.execute(statement, [content, momentId]);\r\n     return result;\r\n   }\r\n }\r\n"
+                },
+                {
+                    "date": 1699273801413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n     `;\r\n     const [result] = await connection.execute(statement, [momentId]);\r\n     return result;\r\n   }\r\n-  async updateById(content, d) {\r\n+  async updateById(content, id) {\r\n     const statement = `UPDATE moment SET content = ? WHERE id = ?`;\r\n     const [result] = await connection.execute(statement, [content, momentId]);\r\n     return result;\r\n   }\r\n"
+                },
+                {
+                    "date": 1699274613007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,8 @@\n     const [result] = await connection.execute(statement, [content, id]);\r\n     return result;\r\n   }\r\n \r\n-async moment\r\n+async momentP\r\n \r\n }\r\n module.exports = new MomentService();\r\n"
+                }
+            ],
+            "date": 1699273344866,
+            "name": "Commit-0",
+            "content": "const connection = require(\"../app/database\");\r\n\r\nclass MomentService {\r\n  async save(content, userId) {\r\n    const statement = `INSERT INTO moment (content,user_id) VALUES (?,?);`;\r\n    const [result] = await connection.execute(statement, [content, userId]);\r\n    console.log(result, \"===\");\r\n    return result;\r\n  }\r\n\r\n  async queryList(offset = 0, size = 10) {\r\n    const statement = `\r\n      SELECT \r\n          m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n          JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime',u.updateAt) user\r\n      FROM moment m\r\n      LEFT JOIN user u ON u.id = m.user_id\r\n      LIMIT ? OFFSET ?;`;\r\n    const [result] = await connection.execute(statement, [String(size), String(offset)]);\r\n    return result;\r\n  }\r\n\r\n  async queryDetail(momentId) {\r\n    const statement = `\r\n      SELECT\r\n        m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n        JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime',u.updateAt) user\r\n      FROM moment m\r\n      LEFT JOIN user u ON u.id = m.user_id\r\n      WHERE m.id =?\r\n    `;\r\n    const [result] = await connection.execute(statement, [momentId]);\r\n    return result;\r\n  }\r\n  async \r\n}\r\nmodule.exports = new MomentService();\r\n"
+        }
+    ]
+}

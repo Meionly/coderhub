@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/config/error.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1699253199256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699253211337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const NAME_OR_PASSWORD_IS_REQUIRE = \"name_or_password_is_require\";\r\n const NAME_IS_ALREADY_EXISTS = \"name_is_already_exists\";\r\n+const NAME_IS_NOT_EXISTS\r\n \r\n-\r\n module.exports = {\r\n   NAME_OR_PASSWORD_IS_REQUIRE,\r\n   NAME_IS_ALREADY_EXISTS,\r\n };\r\n"
+                },
+                {
+                    "date": 1699253370720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const NAME_OR_PASSWORD_IS_REQUIRE = \"name_or_password_is_require\";\r\n const NAME_IS_ALREADY_EXISTS = \"name_is_already_exists\";\r\n const NAME_IS_NOT_EXISTS = \"name_is_not_exists\";\r\n-const pa\r\n+const p\r\n \r\n module.exports = {\r\n   NAME_OR_PASSWORD_IS_REQUIRE,\r\n   NAME_IS_ALREADY_EXISTS,\r\n"
+                },
+                {
+                    "date": 1699253389054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n const NAME_OR_PASSWORD_IS_REQUIRE = \"name_or_password_is_require\";\r\n const NAME_IS_ALREADY_EXISTS = \"name_is_already_exists\";\r\n const NAME_IS_NOT_EXISTS = \"name_is_not_exists\";\r\n-const PASSWORD_IS_\r\n+const PASSWORD_IS_IN\r\n \r\n module.exports = {\r\n   NAME_OR_PASSWORD_IS_REQUIRE,\r\n   NAME_IS_ALREADY_EXISTS,\r\n"
+                }
+            ],
+            "date": 1699253199256,
+            "name": "Commit-0",
+            "content": "const NAME_OR_PASSWORD_IS_REQUIRE = \"name_or_password_is_require\";\r\nconst NAME_IS_ALREADY_EXISTS = \"name_is_already_exists\";\r\n\r\n\r\nmodule.exports = {\r\n  NAME_OR_PASSWORD_IS_REQUIRE,\r\n  NAME_IS_ALREADY_EXISTS,\r\n};\r\n"
+        }
+    ]
+}

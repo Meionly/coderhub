@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/router/moment.router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1699273127469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699273133651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n // 2.查:查询动态(列表/id)\r\n momentRouter.get(\"/list\", momentController.getList);\r\n momentRouter.get(\"/:momentId\", momentController.momentDetail);\r\n // 3.改:修改动态\r\n-momentRouter.patch('/')\r\n+momentRouter.patch('/:momentId',)\r\n // 4.删:删除动态\r\n \r\n module.exports = momentRouter;\r\n"
+                },
+                {
+                    "date": 1699273142980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n // 2.查:查询动态(列表/id)\r\n momentRouter.get(\"/list\", momentController.getList);\r\n momentRouter.get(\"/:momentId\", momentController.momentDetail);\r\n // 3.改:修改动态\r\n-momentRouter.patch('/:momentId',)\r\n+momentRouter.patch('/:momentId', momentController.)\r\n // 4.删:删除动态\r\n \r\n module.exports = momentRouter;\r\n"
+                },
+                {
+                    "date": 1699273168821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n // 2.查:查询动态(列表/id)\r\n momentRouter.get(\"/list\", momentController.getList);\r\n momentRouter.get(\"/:momentId\", momentController.momentDetail);\r\n // 3.改:修改动态\r\n-momentRouter.patch('/:momentId', momentController.upada)\r\n+momentRouter.patch('/:momentId', momentController.upad)\r\n // 4.删:删除动态\r\n \r\n module.exports = momentRouter;\r\n"
+                },
+                {
+                    "date": 1699273174604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n // 2.查:查询动态(列表/id)\r\n momentRouter.get(\"/list\", momentController.getList);\r\n momentRouter.get(\"/:momentId\", momentController.momentDetail);\r\n // 3.改:修改动态\r\n-momentRouter.patch('/:momentId', momentController.upda)\r\n+momentRouter.patch('/:momentId', momentController.updat)\r\n // 4.删:删除动态\r\n \r\n module.exports = momentRouter;\r\n"
+                }
+            ],
+            "date": 1699273127469,
+            "name": "Commit-0",
+            "content": "const KoaRouter = require(\"@koa/router\");\r\nconst momentController = require(\"../controller/moment.controller\");\r\nconst { verifyAuth } = require(\"../middleware/login.middleware\");\r\n\r\nconst momentRouter = new KoaRouter({ prefix: \"/moments\" });\r\n\r\n// 编写接口\r\n// 1.增:新增动态\r\nmomentRouter.post(\"/\", verifyAuth, momentController.create);\r\n// 2.查:查询动态(列表/id)\r\nmomentRouter.get(\"/list\", momentController.getList);\r\nmomentRouter.get(\"/:momentId\", momentController.momentDetail);\r\n// 3.改:修改动态\r\nmomentRouter.patch('/')\r\n// 4.删:删除动态\r\n\r\nmodule.exports = momentRouter;\r\n"
+        }
+    ]
+}
