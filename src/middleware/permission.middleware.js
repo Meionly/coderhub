@@ -27,7 +27,6 @@ const verifyPermission = async (ctx, next) => {
   const keyName = Object.keys(ctx.params)[0];
   const resourceId = ctx.params[keyName];
   const resourceName = keyName.replace("Id", "");
-  // console.log(keyName, Object.keys(ctx.params), resourceId, resourceName);
   // 3.查询数据库是否存在该资源
   const isHasResource = await permissionService.checkIsResource(resourceName, resourceId);
   if (!isHasResource) {

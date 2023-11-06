@@ -6,7 +6,6 @@ class MomentService {
     const [result] = await connection.execute(statement, [content, userId]);
     return result;
   }
-
   async queryList(offset = 0, size = 10) {
     const statement = `
       SELECT 
@@ -18,7 +17,6 @@ class MomentService {
     const [result] = await connection.execute(statement, [String(size), String(offset)]);
     return result;
   }
-
   async queryDetail(id) {
     const statement = `
       SELECT
@@ -36,7 +34,6 @@ class MomentService {
     const [result] = await connection.execute(statement, [content, id]);
     return result;
   }
-
   async deleteById(momentId) {
     const statement = `DELETE FROM moment WHERE id = ?;`;
     const [result] = await connection.execute(statement, [momentId]);
