@@ -14,7 +14,6 @@ class CommentController {
       data: result,
     };
   }
-
   async replyComment(ctx, next) {
     const { content, momentId, commentId } = ctx.request.body;
     const { id: userId } = ctx.user;
@@ -22,6 +21,15 @@ class CommentController {
     ctx.body = {
       code: 200,
       message: "回复评论成功",
+      data: result,
+    };
+  }
+  async deleteComment(ctx, next) {
+    const { commentId } = ctx.params;
+    const result = await commentService.deleteById(commentId);
+    ctx.body = {
+      code: 200,
+      message: "删除评论成功~~",
       data: result,
     };
   }
