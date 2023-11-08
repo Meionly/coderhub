@@ -1,3 +1,4 @@
+const labelService = require("../service/label.service");
 const momentService = require("../service/moment.service");
 
 class MomentController {
@@ -64,6 +65,41 @@ class MomentController {
       message: "删除动态成功",
       data: result,
     };
+  }
+  // 为moment添加abeL
+  async addLabel(ctx, next) {
+    // 1.获取要添加的标签&要添加动态的id
+    const { momentId } = ctx.params;
+    const { labels } = ctx;
+    // 2.将moment_id和Label_id添力moment_LabeL关系表
+    try {
+      const newLabels = [];
+      const allResult = [];
+      for (const label of labels) {
+        // 2.1.判断Labe_id是否已经和moment_id己经存在该数据;
+        const result = await labelService.hasLabel(momentId, label.id);
+        if (!result) {
+          // 2.2.不存该moment_id和Label_id的关系数据;
+          const result = await labelService.addLabelById(momentId, label.id);
+          allResult.push(result);
+        }
+        newLabels.push(label);
+        allResult.push(result);
+      }
+      if (newLabels.length === labels.length) {
+        ctx.body = {
+          code: 200,
+          message: "添加标签成功",
+          data: allResult,
+        };
+      }
+    } catch (error) {
+      ctx.body = {
+        code: 500,
+        message: "添加标签失败",
+        data: error,
+      };
+    }
   }
 }
 

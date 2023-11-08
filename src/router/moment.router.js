@@ -1,5 +1,5 @@
 const KoaRouter = require("@koa/router");
-const { createMoment, getList, momentDetail, updateMoment, deleteMoment } = require("../controller/moment.controller");
+const { createMoment, getList, momentDetail, updateMoment, deleteMoment, addLabel } = require("../controller/moment.controller");
 const { verifyAuth } = require("../middleware/login.middleware");
 const { verifyPermission } = require("../middleware/permission.middleware");
 const { verifyLabelExists } = require("../middleware/label.middleware");
@@ -20,7 +20,7 @@ momentRouter.patch("/:momentId", verifyAuth, verifyPermission, updateMoment);
 // momentRouter.delete("/:momentId", verifyAuth, verifyMomentPermission, deleteMoment);
 momentRouter.delete("/:momentId", verifyAuth, verifyPermission, deleteMoment);
 
-//5.添加标整签
+//5.添加标签
 /**中间件:
   1.是否登录
   2.验证是否有操作这个动态的权限
@@ -31,8 +31,6 @@ momentRouter.delete("/:momentId", verifyAuth, verifyPermission, deleteMoment);
     * 所有的Labels都在已经在label表
     * 动态 2，和LabeLs关系添加到关系表中
 */
-momentRouter.post("/:momentId/labels", verifyAuth, verifyPermission,verifyLabelExists, (ctx, next) => {
-  ctx.body = "ooooooooooooooooooooooooo";
-});
+momentRouter.post("/:momentId/labels", verifyAuth, verifyPermission, verifyLabelExists, addLabel);
 
 module.exports = momentRouter;
