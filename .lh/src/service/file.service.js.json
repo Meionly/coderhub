@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/service/file.service.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1699534361751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699534563696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n     // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    // const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n     return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n"
+                },
+                {
+                    "date": 1699534588484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n const connection = require(\"../app/database\");\r\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n-    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    // const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n+    const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n     return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n"
+                },
+                {
+                    "date": 1699534623767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n     const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    const [result] =await connection.execute(statement, [filename, mimetype, size, userId]);\r\n     return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n"
+                },
+                {
+                    "date": 1699534682510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n     const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    const [result] =await connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n     return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n"
+                },
+                {
+                    "date": 1699534688506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+const connection = require(\"../app/database\");\r\n+\r\n+class FileService {\r\n+  async fileSave(filename, mimetype, size, userId) {\r\n+    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n+    // const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    // return result;\r\n+  }\r\n+\r\n+  async queryUserAvatar(userId) {\r\n+    const statement = `SELECT * FROM avatar WHERE user_id =?`;\r\n+    const [result] = await connection.execute(statement, [userId]);\r\n+    return result.pop() ?? [];\r\n+  }\r\n+}\r\n+\r\n+module.exports = new FileService();\r\n"
+                },
+                {
+                    "date": 1699534747623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,25 +1,8 @@\n const connection = require(\"../app/database\");\r\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n-    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    // const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n-    // return result;\r\n-  }\r\n-\r\n-  async queryUserAvatar(userId) {\r\n-    const statement = `SELECT * FROM avatar WHERE user_id =?`;\r\n-    const [result] = await connection.execute(statement, [userId]);\r\n-    return result.pop() ?? [];\r\n-  }\r\n-}\r\n-\r\n-module.exports = new FileService();\r\n-const connection = require(\"../app/database\");\r\n-\r\n-class FileService {\r\n-  async fileSave(filename, mimetype, size, userId) {\r\n     const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n     const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n     return result;\r\n   }\r\n"
+                },
+                {
+                    "date": 1699534764594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n const connection = require(\"../app/database\");\r\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n-    const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n-    return result;\r\n+    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n+    // const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    // return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n     const statement = `SELECT * FROM avatar WHERE user_id =?`;\r\n"
+                },
+                {
+                    "date": 1699535062032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n const connection = require(\"../app/database\");\r\n \r\n class FileService {\r\n   async fileSave(filename, mimetype, size, userId) {\r\n-    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n-    // const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n-    // return result;\r\n+    const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n+    const [result] = await connection.execute(statement, [filename, mimetype, size, userId]);\r\n+    return result;\r\n   }\r\n \r\n   async queryUserAvatar(userId) {\r\n     const statement = `SELECT * FROM avatar WHERE user_id =?`;\r\n"
+                }
+            ],
+            "date": 1699534361751,
+            "name": "Commit-0",
+            "content": "const connection = require(\"../app/database\");\r\n\r\nclass FileService {\r\n  async fileSave(filename, mimetype, size, userId) {\r\n    // const statement = `INSERT INTO avatar (filename,mimetype,size,user_id) VALUES (?,?,?,?);`;\r\n    const [result] = connection.execute(statement, [filename, mimetype, size, userId]);\r\n    return result;\r\n  }\r\n\r\n  async queryUserAvatar(userId) {\r\n    const statement = `SELECT * FROM avatar WHERE user_id =?`;\r\n    const [result] = await connection.execute(statement, [userId]);\r\n    return result.pop() ?? [];\r\n  }\r\n}\r\n\r\nmodule.exports = new FileService();\r\n"
+        }
+    ]
+}

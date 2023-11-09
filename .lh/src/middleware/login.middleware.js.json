@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/middleware/login.middleware.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1699534312483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699534646318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,11 +29,11 @@\n \r\n const verifyAuth = async (ctx, next) => {\r\n   // 1.获取token\r\n   const authorization = ctx.headers.authorization;\r\n-  // if (!authorization) {\r\n-  //   return ctx.app.emit(\"error\", EXPIRED_TK_OR_UNAUTHORIZED, ctx);\r\n-  // }\r\n+  if (!authorization) {\r\n+    return ctx.app.emit(\"error\", EXPIRED_TK_OR_UNAUTHORIZED, ctx);\r\n+  }\r\n   const token = authorization.replace(\"Bearer \", \"\");\r\n   // 2.验证token是否有效\r\n   try {\r\n     // 1.获取token中的信息\r\n"
+                }
+            ],
+            "date": 1699534312483,
+            "name": "Commit-0",
+            "content": "const jwt = require(\"jsonwebtoken\");\r\nconst userService = require(\"../service/user.service\");\r\nconst { md5Password } = require(\"../utils/handle-password\");\r\nconst { NAME_OR_PASSWORD_IS_REQUIRE, NAME_IS_NOT_EXISTS, PASSWORD_IS_INCORRENT, EXPIRED_TK_OR_UNAUTHORIZED } = require(\"../config/error\");\r\nconst { PUBLIC_KEY } = require(\"../config/secret\");\r\n\r\nconst verifyLogin = async (ctx, next) => {\r\n  // 1.判断用户名和密码是否为空\r\n  const { name, password } = ctx.request.body;\r\n  if (!name || !password) {\r\n    return ctx.app.emit(\"error\", NAME_OR_PASSWORD_IS_REQUIRE, ctx);\r\n  }\r\n  // 2.查询该用户是否在数据库中存在\r\n  const users = await userService.findUserByName(name);\r\n  const user = users[0];\r\n  if (!user) {\r\n    return ctx.app.emit(\"error\", NAME_IS_NOT_EXISTS, ctx);\r\n  }\r\n  // 3.查询数据库中密码和用户传递的密码是否一致\r\n  if (user.password !== md5Password(password)) {\r\n    return ctx.app.emit(\"error\", PASSWORD_IS_INCORRENT, ctx);\r\n  }\r\n  // 4.将user对象保存在ctx\r\n  ctx.user = user;\r\n\r\n  // 执行下一个中间件\r\n  await next();\r\n};\r\n\r\nconst verifyAuth = async (ctx, next) => {\r\n  // 1.获取token\r\n  const authorization = ctx.headers.authorization;\r\n  // if (!authorization) {\r\n  //   return ctx.app.emit(\"error\", EXPIRED_TK_OR_UNAUTHORIZED, ctx);\r\n  // }\r\n  const token = authorization.replace(\"Bearer \", \"\");\r\n  // 2.验证token是否有效\r\n  try {\r\n    // 1.获取token中的信息\r\n    const result = jwt.verify(token, PUBLIC_KEY, {\r\n      algorithms: [\"RS256\"],\r\n    });\r\n    // 2.将token的信息保留下来\r\n    ctx.user = result;\r\n    // 3.执行下一个中间件\r\n    await next();\r\n  } catch (error) {\r\n    ctx.app.emit(\"error\", EXPIRED_TK_OR_UNAUTHORIZED, ctx);\r\n  }\r\n};\r\n\r\nmodule.exports = {\r\n  verifyLogin,\r\n  verifyAuth,\r\n};\r\n"
+        }
+    ]
+}

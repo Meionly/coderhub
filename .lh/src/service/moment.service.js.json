@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/service/moment.service.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1699535419796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699535432903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   async queryList(offset = 0, size = 10) {\r\n     const statement = `\r\n       SELECT \r\n           m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n-          JSON_OBJECT('id',u.id,'name',u.name,','createTime',u.createAt,'updateTime',u.updateAt) user,\r\n+          JSON_OBJECT('id',u.id,'name',u.name,'avatarURL,'createTime',u.createAt,'updateTime',u.updateAt) user,\r\n           (SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount,\r\n           (SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount\r\n       FROM moment m\r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535443398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   async queryList(offset = 0, size = 10) {\r\n     const statement = `\r\n       SELECT \r\n           m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n-          JSON_OBJECT('id',u.id,'name',u.name,'avatarURL,'createTime',u.createAt,'updateTime',u.updateAt) user,\r\n+          JSON_OBJECT('id',u.id,'name',u.name,'avatarURL',u.avatar_url,'createTime',u.createAt,'updateTime',u.updateAt) user,\r\n           (SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount,\r\n           (SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount\r\n       FROM moment m\r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535457924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n         (\r\n           JSON_ARRAYAGG(JSON_OBJECT(\r\n             'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n-            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t\t\t) \r\n+            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t,'avatarURL',u.avatar_url,\t\t) \r\n           ))\r\n         ) comments\r\n       FROM moment m \r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535464674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n         (\r\n           JSON_ARRAYAGG(JSON_OBJECT(\r\n             'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n-            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t,'avatarURL',u.avatar_url,\t\t) \r\n+            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t,'avatarURL',cu.avatar_url\t\t) \r\n           ))\r\n         ) comments\r\n       FROM moment m \r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535470007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n         (\r\n           JSON_ARRAYAGG(JSON_OBJECT(\r\n             'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n-            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t,'avatarURL',cu.avatar_url\t\t) \r\n+            'user',JSON_OBJECT(0'id',cu.id,'name',cu.name\t,'avatarURL',cu.avatar_url\t\t) \r\n           ))\r\n         ) comments\r\n       FROM moment m \r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535477193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n         (\r\n           JSON_ARRAYAGG(JSON_OBJECT(\r\n             'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n-            'user',JSON_OBJECT(0'id',cu.id,'name',cu.name\t,'avatarURL',cu.avatar_url\t\t) \r\n+            'user',JSON_OBJECT('id',cu.id,'name',cu.name\t'avatarURL',cu.avatar_url\t\t) \r\n           ))\r\n         ) comments\r\n       FROM moment m \r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                },
+                {
+                    "date": 1699535483300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n         (\r\n           JSON_ARRAYAGG(JSON_OBJECT(\r\n             'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n-            'user',JSON_OBJECT('id',cu.id,'name',cu.name\t'avatarURL',cu.avatar_url\t\t) \r\n+            'user',JSON_OBJECT('id',cu.id,'name',cu.name,'avatarURL',cu.avatar_url) \r\n           ))\r\n         ) comments\r\n       FROM moment m \r\n       LEFT JOIN user u ON u.id = m.user_id\r\n"
+                }
+            ],
+            "date": 1699535419796,
+            "name": "Commit-0",
+            "content": "const connection = require(\"../app/database\");\r\n\r\nclass MomentService {\r\n  async saveMoment(content, userId) {\r\n    const statement = `INSERT INTO moment (content,user_id) VALUES (?,?);`;\r\n    const [result] = await connection.execute(statement, [content, userId]);\r\n    return result;\r\n  }\r\n  async queryList(offset = 0, size = 10) {\r\n    const statement = `\r\n      SELECT \r\n          m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n          JSON_OBJECT('id',u.id,'name',u.name,','createTime',u.createAt,'updateTime',u.updateAt) user,\r\n          (SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount,\r\n          (SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount\r\n      FROM moment m\r\n      LEFT JOIN user u ON u.id = m.user_id\r\n      LIMIT ? OFFSET ?;`;\r\n    const [result] = await connection.execute(statement, [String(size), String(offset)]);\r\n    return result;\r\n  }\r\n  async queryDetail(id) {\r\n    // const statement = `\r\n    //   SELECT\r\n    //     m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n    //     JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime',u.updateAt) user\r\n    //   FROM moment m\r\n    //   LEFT JOIN user u ON u.id = m.user_id\r\n    //   WHERE m.id =?\r\n    // `;\r\n    const statement = `\r\n      SELECT \r\n        m.id id,m.content content,m.createAt createAt,m.updateAt updateAt,\r\n        JSON_OBJECT('id',u.id,'name',u.name,'createAt',u.createAt,'updateAt',u.updateAt) user,\r\n        (\r\n          JSON_ARRAYAGG(JSON_OBJECT(\r\n            'id',c.id,'content',c.content,'commentId',c.comment_id,'createAt',c.createAt,'updateAt',c.updateAt,\r\n            'user',JSON_OBJECT(\t\t\t\t'id',cu.id,'name',cu.name\t\t\t) \r\n          ))\r\n        ) comments\r\n      FROM moment m \r\n      LEFT JOIN user u ON u.id = m.user_id\r\n      LEFT JOIN comment c ON c.moment_id = m.id\r\n      LEFT JOIN user cu ON cu.id = c.user_id\r\n      WHERE m.id = ?\r\n      GROUP BY m.id;\r\n    `;\r\n    const [result] = await connection.execute(statement, [id]);\r\n    return result;\r\n  }\r\n  async updateById(content, id) {\r\n    const statement = `UPDATE moment SET content = ? WHERE id = ?`;\r\n    const [result] = await connection.execute(statement, [content, id]);\r\n    return result;\r\n  }\r\n  async deleteById(momentId) {\r\n    const statement = `DELETE FROM moment WHERE id = ?;`;\r\n    const [result] = await connection.execute(statement, [momentId]);\r\n    return result;\r\n  }\r\n}\r\nmodule.exports = new MomentService();\r\n"
+        }
+    ]
+}

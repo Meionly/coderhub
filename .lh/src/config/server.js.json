@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/config/server.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1699534727582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699534923267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,5 @@\n+const dotenv = require(\"dotenv\");\r\n+\r\n+dotenv.config();\r\n+\r\n+module.exports = { SERVER_HOST, SERVER_ } = process.env;\r\n"
+                },
+                {
+                    "date": 1699534929435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,5 @@\n const dotenv = require(\"dotenv\");\r\n \r\n dotenv.config();\r\n \r\n-module.exports = { SERVER_HOST, SERVER_ } = process.env;\r\n-const dotenv = require(\"dotenv\");\r\n-\r\n-dotenv.config();\r\n-\r\n-module.exports = { SERVER_HOST, SERVER_HOST } = process.env;\r\n+module.exports = { SERVER_port, SERVER_HOST } = process.env;\r\n"
+                }
+            ],
+            "date": 1699534727582,
+            "name": "Commit-0",
+            "content": "const dotenv = require(\"dotenv\");\r\n\r\ndotenv.config();\r\n\r\nmodule.exports = { SERVER_HOST, SERVER_HOST } = process.env;\r\n"
+        }
+    ]
+}

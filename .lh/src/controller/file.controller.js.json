@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/controller/file.controller.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1699534372157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699534511134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,17 +3,17 @@\n const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n \r\n class FileController {\r\n   async fileCreate(ctx, next) {\r\n-    // 1.获取对应的信息\r\n-    const { filename, mimetype, size } = ctx.request.file;\r\n-    const { id: userId } = ctx.user;\r\n-    // 2.将图片信息和id结合起来进行存储\r\n-    const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n-    console.log();\r\n-    // 3.将头像的地址信息，·保存到user表中\r\n-    const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n-    const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n+    // // 1.获取对应的信息\r\n+    // const { filename, mimetype, size } = ctx.request.file;\r\n+    // const { id: userId } = ctx.user;\r\n+    // // 2.将图片信息和id结合起来进行存储\r\n+    // const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n+    // console.log(result, \"[][][][][][][\");\r\n+    // // 3.将头像的地址信息，·保存到user表中\r\n+    // const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n+    // const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n \r\n     // 3.返回结果\r\n     ctx.body = {\r\n       code: 200,\r\n"
+                },
+                {
+                    "date": 1699534520359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     // 3.返回结果\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"文件上传成功~\",\r\n-      data: avatarUrl,\r\n+      // data: avatarUrl,\r\n     };\r\n   }\r\n }\r\n module.exports = new FileController();\r\n"
+                },
+                {
+                    "date": 1699534536837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n \r\n class FileController {\r\n   async fileCreate(ctx, next) {\r\n     // // 1.获取对应的信息\r\n-    // const { filename, mimetype, size } = ctx.request.file;\r\n-    // const { id: userId } = ctx.user;\r\n+    const { filename, mimetype, size } = ctx.request.file;\r\n+    const { id: userId } = ctx.user;\r\n     // // 2.将图片信息和id结合起来进行存储\r\n     // const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n     // console.log(result, \"[][][][][][][\");\r\n     // // 3.将头像的地址信息，·保存到user表中\r\n"
+                },
+                {
+                    "date": 1699534544178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+const fileService = require(\"../service/file.service\");\r\n+const { userService } = require(\"../service/user.service\");\r\n+const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n+\r\n+class FileController {\r\n+  async fileCreate(ctx, next) {\r\n+    // // 1.获取对应的信息\r\n+    const { filename, mimetype, size } = ctx.request.file;\r\n+    const { id: userId } = ctx.user;\r\n+    // // 2.将图片信息和id结合起来进行存储\r\n+    const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n+    // console.log(result, \"[][][][][][][\");\r\n+    // // 3.将头像的地址信息，·保存到user表中\r\n+    // const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n+    // const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n+\r\n+    // 3.返回结果\r\n+    ctx.body = {\r\n+      code: 200,\r\n+      message: \"文件上传成功~\",\r\n+      // data: avatarUrl,\r\n+      // data: avatarUrl,\r\n+    };\r\n+  }\r\n+}\r\n+module.exports = new FileController();\r\n"
+                },
+                {
+                    "date": 1699534630548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,12 +8,12 @@\n     const { filename, mimetype, size } = ctx.request.file;\r\n     const { id: userId } = ctx.user;\r\n     // // 2.将图片信息和id结合起来进行存储\r\n     const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n-    // console.log(result, \"[][][][][][][\");\r\n-    // // 3.将头像的地址信息，·保存到user表中\r\n-    // const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n-    // const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n+    console.log(result, \"[][][][][][][\");\r\n+    // 3.将头像的地址信息，·保存到user表中\r\n+    const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n+    const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n \r\n     // 3.返回结果\r\n     ctx.body = {\r\n       code: 200,\r\n"
+                },
+                {
+                    "date": 1699534637155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,44 +8,18 @@\n     const { filename, mimetype, size } = ctx.request.file;\r\n     const { id: userId } = ctx.user;\r\n     // // 2.将图片信息和id结合起来进行存储\r\n     const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n-    console.log(result, \"[][][][][][][\");\r\n     // 3.将头像的地址信息，·保存到user表中\r\n     const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n     const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n \r\n     // 3.返回结果\r\n     ctx.body = {\r\n       code: 200,\r\n       message: \"文件上传成功~\",\r\n-      // data: avatarUrl,\r\n-      // data: avatarUrl,\r\n+      data: avatarUrl,\r\n+      data: result,\r\n     };\r\n   }\r\n }\r\n module.exports = new FileController();\r\n-const fileService = require(\"../service/file.service\");\r\n-const { userService } = require(\"../service/user.service\");\r\n-const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n-\r\n-class FileController {\r\n-  async fileCreate(ctx, next) {\r\n-    // // 1.获取对应的信息\r\n-    const { filename, mimetype, size } = ctx.request.file;\r\n-    const { id: userId } = ctx.user;\r\n-    // // 2.将图片信息和id结合起来进行存储\r\n-    // const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n-    // console.log(result, \"[][][][][][][\");\r\n-    // // 3.将头像的地址信息，·保存到user表中\r\n-    // const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n-    // const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n-\r\n-    // 3.返回结果\r\n-    ctx.body = {\r\n-      code: 200,\r\n-      message: \"文件上传成功~\",\r\n-      // data: avatarUrl,\r\n-    };\r\n-  }\r\n-}\r\n-module.exports = new FileController();\r\n"
+                },
+                {
+                    "date": 1699534828411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const fileService = require(\"../service/file.service\");\r\n+const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n const { userService } = require(\"../service/user.service\");\r\n-const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n \r\n class FileController {\r\n   async fileCreate(ctx, next) {\r\n     // // 1.获取对应的信息\r\n@@ -17,9 +17,8 @@\n     ctx.body = {\r\n       code: 200,\r\n       message: \"文件上传成功~\",\r\n       data: avatarUrl,\r\n-      data: result,\r\n     };\r\n   }\r\n }\r\n module.exports = new FileController();\r\n"
+                },
+                {
+                    "date": 1699534858628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const fileService = require(\"../service/file.service\");\r\n const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n-const { userService } = require(\"../service/user.service\");\r\n+const { userService = require(\"../service/user.service\");\r\n \r\n class FileController {\r\n   async fileCreate(ctx, next) {\r\n     // // 1.获取对应的信息\r\n"
+                },
+                {
+                    "date": 1699534985944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n const fileService = require(\"../service/file.service\");\r\n+const userService = require(\"../service/user.service\");\r\n const { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n-const userService = require(\"../service/user.service\");\r\n \r\n class FileController {\r\n   async fileCreate(ctx, next) {\r\n     // // 1.获取对应的信息\r\n"
+                },
+                {
+                    "date": 1699535018561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     const { id: userId } = ctx.user;\r\n     // // 2.将图片信息和id结合起来进行存储\r\n     const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n     // 3.将头像的地址信息，·保存到user表中\r\n-    const avatarUrl = `${SERVER_HOST}:${SERVER_POST}/users/avatar/${userId}`;\r\n+    const avatarUrl = `${SERVER_HOST}:${SERVER_PORT}/users/avatar/${userId}`;\r\n     const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n \r\n     // 3.返回结果\r\n     ctx.body = {\r\n"
+                }
+            ],
+            "date": 1699534372157,
+            "name": "Commit-0",
+            "content": "const fileService = require(\"../service/file.service\");\r\nconst { userService } = require(\"../service/user.service\");\r\nconst { SERVICE_HOST, SERVICE_PORT } = require(\"../config/server\");\r\n\r\nclass FileController {\r\n  async fileCreate(ctx, next) {\r\n    // 1.获取对应的信息\r\n    const { filename, mimetype, size } = ctx.request.file;\r\n    const { id: userId } = ctx.user;\r\n    // 2.将图片信息和id结合起来进行存储\r\n    const result = await fileService.fileSave(filename, mimetype, size, userId);\r\n    console.log();\r\n    // 3.将头像的地址信息，·保存到user表中\r\n    const avatarUrl = `${SERVICE_HOST}:${SERVICE_PORT}/users/avatar/${userId}`;\r\n    const avatar = await userService.updateUserAvatar(avatarUrl, userId);\r\n\r\n    // 3.返回结果\r\n    ctx.body = {\r\n      code: 200,\r\n      message: \"文件上传成功~\",\r\n      data: avatarUrl,\r\n    };\r\n  }\r\n}\r\nmodule.exports = new FileController();\r\n"
+        }
+    ]
+}

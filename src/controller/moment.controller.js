@@ -72,19 +72,20 @@ class MomentController {
     const { momentId } = ctx.params;
     const { labels } = ctx;
     // 2.将moment_id和Label_id添力moment_LabeL关系表
+    if (!labels.length) return (ctx.body = { code: 0, message: "请输入标签名称~" });
     try {
       const newLabels = [];
       const allResult = [];
       for (const label of labels) {
         // 2.1.判断Labe_id是否已经和moment_id己经存在该数据;
-        const result = await labelService.hasLabel(momentId, label.id);
-        if (!result) {
+        const isExists = await labelService.hasLabel(momentId, label.id);
+        if (!isExists) {
           // 2.2.不存该moment_id和Label_id的关系数据;
           const result = await labelService.addLabelById(momentId, label.id);
           allResult.push(result);
         }
         newLabels.push(label);
-        allResult.push(result);
+        allResult.push(isExists);
       }
       if (newLabels.length === labels.length) {
         ctx.body = {

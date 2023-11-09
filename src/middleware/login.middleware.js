@@ -34,17 +34,14 @@ const verifyAuth = async (ctx, next) => {
     return ctx.app.emit("error", EXPIRED_TK_OR_UNAUTHORIZED, ctx);
   }
   const token = authorization.replace("Bearer ", "");
-
   // 2.验证token是否有效
   try {
     // 1.获取token中的信息
     const result = jwt.verify(token, PUBLIC_KEY, {
       algorithms: ["RS256"],
     });
-
     // 2.将token的信息保留下来
     ctx.user = result;
-    
     // 3.执行下一个中间件
     await next();
   } catch (error) {

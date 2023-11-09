@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/router/file.router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1699534426208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1699534431943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \r\n const fileRouter = new KoaRouter({ prefix: \"/file\" });\r\n \r\n fileRouter.post(\"/avatar\", verifyAuth,\r\n-  handleAvatar, fileCreate);\r\n+  handleAvatar,\r\n+  fileCreate,);\r\n \r\n \r\n module.exports = fileRouter;\r\n"
+                },
+                {
+                    "date": 1699534442435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,10 @@\n const fileRouter = new KoaRouter({ prefix: \"/file\" });\r\n \r\n fileRouter.post(\"/avatar\", verifyAuth,\r\n   handleAvatar,\r\n-  fileCreate,);\r\n+  fileCreate, () => {\r\n+    ctx.body =\r\n+  });\r\n \r\n \r\n module.exports = fileRouter;\r\n"
+                },
+                {
+                    "date": 1699534452424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n const fileRouter = new KoaRouter({ prefix: \"/file\" });\r\n \r\n fileRouter.post(\"/avatar\", verifyAuth,\r\n   handleAvatar,\r\n-  fileCreate, () => {\r\n+  fileCreate, (ctx,next) => {\r\n     ctx.body ='pppppppppppppppp'\r\n   });\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1699534471593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+const KoaRouter = require(\"@koa/router\");\r\n+const { verifyAuth } = require(\"../middleware/login.middleware\");\r\n+const { fileCreate } = require(\"../controller/file.controller\");\r\n+const { handleAvatar } = require(\"../middleware/file.middleware\");\r\n+\r\n+const fileRouter = new KoaRouter({ prefix: \"/file\" });\r\n+\r\n+fileRouter.post(\"/avatar\", verifyAuth,\r\n+  handleAvatar, fileCreate, (ctx, next) => {\r\n+  ctx.body = \"pppppppppppppppp\";\r\n+});\r\n+\r\n+module.exports = fileRouter;\r\n"
+                }
+            ],
+            "date": 1699534426208,
+            "name": "Commit-0",
+            "content": "const KoaRouter = require(\"@koa/router\");\r\nconst { verifyAuth } = require(\"../middleware/login.middleware\");\r\nconst { fileCreate } = require(\"../controller/file.controller\");\r\nconst { handleAvatar } = require(\"../middleware/file.middleware\");\r\n\r\nconst fileRouter = new KoaRouter({ prefix: \"/file\" });\r\n\r\nfileRouter.post(\"/avatar\", verifyAuth,\r\n  handleAvatar, fileCreate);\r\n\r\n\r\nmodule.exports = fileRouter;\r\n"
+        }
+    ]
+}
